@@ -1,16 +1,12 @@
-# AutoPAML
+# AutoPAML (2016)
 
-These are a series of scripts that I used to run CodeML on large gene datasets for two publications, however these are setup for one of the publications.  The data used were a directory of FASTA files containing transcript orthologs between Magnaporthe Oryzae, the rice blast fungus, and two of its closest sequenced ancestors.
+These are a series of scripts that were used to run CodeML on large gene datasets for two publications.  The data used were a directory of FASTA files containing transcript orthologs between Magnaporthe Oryzae, the rice blast fungus, and two of its closest sequenced ancestors.  
 
 CodeML is a maximum likelihood algorithm for determining (1) the probability that a cluster of aligned DNA sequences are undergoing directional selection, and if so, (2) whether the directional seletion is diversifying (more nonsynonymous mutations) or purifying (more synonymous mutations). 
 
-Note:  These codes were developed at the very beginning of my coding career, so they are not the best formatted/designed - be gentle!
+Note 1:  These codes were written while I first learning to code and are therefore lacking and very sloppy (sorry!).  If there are any questions related to the code, please feel free to contact me.
 
-## Getting Started
-
-PAML can be found at http://abacus.gene.ucl.ac.uk/software/paml.html
-
-I would recommend reading the publication(s) associated with the PAML and CodeML, and play with a few toy datasets and the GUI.
+Note 2:  These codes were not formatted to be used by all users.  The main compatibility issues lie in accessing the file names (easy) and ensuring the file contents are consistent with the code (more difficult - not much of an issue after alignment)
 
 ### Prerequisites
 
@@ -18,39 +14,40 @@ Python 2.7
 PAML commandline
 MUSCLE (sequence alignment)
 
-### Installing
+### Installation 
 
-Simply download the scripts and modify as needed, they are annotated for readability.
+Extract files to a directory.
 
-## Description of Scripts:
+## Description of Scripts
 
-ASeqSort:     C
+ASeqSort:     .txt to .fasta file converter
 
-BAlign:       O
+BAlign:       MUSCLE alignment of .fasta files
 
-CAlnSorter:   M
+CAlnSorter:   Sorts data within the MUSCLE (.afa) output files 
 
-CGapExp:      I
+CGapExp:      Removes columns in the alignment if they have a certain % of gaps (experimental - this designed to answer questions relating to gaps)
+                  - Note: This value is set to 70%, which was selected based upon the number of alignments in each file
 
-DNucCheck:    N
+DNucCheck:    Checks if the alignments are divisible by 3 (a requirement for PAML) and corrects with terminal gaps
 
-EDirSorter:   G
+EDirSorter:   Deletes intermediate files, creates new directories, sorts files
 
-EDirSorter2:  
+EDirSorter2:  Same as above, but used if the gap removal tool was used
 
-FPAML:        S
+FPAML:        Runs PAML for each file
 
-FPAML2:       O
+FPAML2:       Runs PAML, but with cleandata function utilized
 
-FPAML3:       O
+FPAML3:       Runs PAML for the files generated if the gap removal tool was used
 
-GPreResult:   N
+GPreResult:   Reads PAML output and generates a directory of the output values
 
-GResult:      
+GResult:      Conglomerates PAML results into a single file
 
-HPreStat:     
+HPreStat:     Obtains values from result file for statistical analysis
 
-HStat:        
+HStat:        Creates a final file containing all of the results for downstream analysis
 
 ## Acknowledgments
 
